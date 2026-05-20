@@ -1,0 +1,27 @@
+devglan:
+  ingestion:
+    batch:
+      enabled: false
+spring:
+  application:
+    name: spring-ai-rag-advisor
+
+  ai:
+    vectorstore:
+      elasticsearch:
+        initialize-schema: false
+        index-name: indian-recipes
+        dimensions: 768
+    ollama:
+      base-url: http://localhost:11434
+      connection-timeout: 60s
+      read-timeout: 300s
+      embedding:
+        options:
+          model: nomic-embed-text       #docker exec -it spring-ai-rag-ollama ollama pull nomic-embed-text
+      chat:
+        options:
+          model: qwen2.5:3b  #llama3.2
+          temperature: 0.5      # lower = more factual answers; 0.0–1.0
+          num-ctx: 8192
+          keep_alive: 30m
